@@ -1,4 +1,4 @@
-module github.com/segwin/advent-of-code
+module github.com/segwin/adventofcode-2020
 
 go 1.15
 

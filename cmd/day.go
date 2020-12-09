@@ -3,16 +3,16 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/segwin/advent-of-code/internal/solutions"
-	"github.com/segwin/advent-of-code/internal/solutions/day1"
-	"github.com/segwin/advent-of-code/internal/solutions/day2"
-	"github.com/segwin/advent-of-code/internal/solutions/day3"
-	"github.com/segwin/advent-of-code/internal/solutions/day4"
-	"github.com/segwin/advent-of-code/internal/solutions/day5"
-	"github.com/segwin/advent-of-code/internal/solutions/day6"
-	"github.com/segwin/advent-of-code/internal/solutions/day7"
-	"github.com/segwin/advent-of-code/internal/solutions/day8"
-	"github.com/segwin/advent-of-code/internal/solutions/day9"
+	"github.com/segwin/adventofcode-2020/internal/solutions"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day1"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day2"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day3"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day4"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day5"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day6"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day7"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day8"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day9"
 	"github.com/spf13/cobra"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/segwin/advent-of-code/cmd"
+	"github.com/segwin/adventofcode-2020/cmd"
 )
 
 func main() {

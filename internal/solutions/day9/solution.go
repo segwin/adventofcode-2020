@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/segwin/advent-of-code/internal/input"
+	"github.com/segwin/adventofcode-2020/internal/input"
 )
 
 var (
