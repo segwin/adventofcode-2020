@@ -50,7 +50,7 @@ func (s *Solution) getBags(ctx context.Context, inputFile string) (bags map[stri
 }
 
 func part1(colour string, bags map[string]Bag) {
-	fmt.Println("PART 1")
+	fmt.Println("\nPART 1")
 
 	count := 0
 	for _, bag := range bags {
@@ -64,7 +64,7 @@ func part1(colour string, bags map[string]Bag) {
 }
 
 func part2(colour string, bags map[string]Bag) {
-	fmt.Println("PART 2")
+	fmt.Println("\nPART 2")
 
 	bag, ok := bags[colour]
 	if !ok {

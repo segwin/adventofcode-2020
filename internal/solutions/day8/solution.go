@@ -49,17 +49,19 @@ func (s *Solution) getInstructions(ctx context.Context, inputFile string) (instr
 }
 
 func part1(instructions instructionSet) (sequence []int) {
+	fmt.Println("\nPART 1")
+
 	accumulator, sequence, recursionDetected := instructions.Execute()
 	if recursionDetected {
-		fmt.Printf("PART 1 NOTE: detected recursion (last position: %d)\n", sequence[len(sequence)-1])
+		fmt.Printf("  Detected recursion (last position: %d)\n", sequence[len(sequence)-1])
 	}
 
-	fmt.Printf("PART 1 RESULT: Accumulator = %d\n", accumulator)
+	fmt.Printf("  RESULT: Accumulator = %d\n", accumulator)
 
 	return sequence
 }
 
-func tryFixAt(instructions instructionSet, fixPosition int) (ok bool) {
+func tryFixAt(instructions instructionSet, fixPosition int) (accumulator int, ok bool) {
 	instruction := instructions[fixPosition]
 
 	previousOp := instruction.operation
@@ -74,33 +76,35 @@ func tryFixAt(instructions instructionSet, fixPosition int) (ok bool) {
 
 	case nop:
 		if instruction.argument == 1 {
-			return false // nop +1 and jmp +1 are equivalent here since both jump exactly 1 instruction forward
+			return 0, false // nop +1 and jmp +1 are equivalent here since both jump exactly 1 instruction forward
 		}
 		instruction.operation = jmp
 
 	case acc:
-		return false // acc can't change the outcome here
+		return 0, false // acc can't change the outcome here
 	}
 
 	// get result
 	accumulator, _, recursionDetected := instructions.Execute()
 	if recursionDetected {
-		return false // try again with the previous instruction in the sequence
+		return 0, false // try again with the previous instruction in the sequence
 	}
 
-	fmt.Printf("PART 2 RESULT: Accumulator = %d\n", accumulator)
-	return true
+	return accumulator, true
 }
 
 func part2(instructions instructionSet, part1Sequence []int) {
+	fmt.Println("\nPART 2")
+
 	// start at the end of the previous sequence and try flipping nop<->jmp until a working path is found
 	for s := len(part1Sequence) - 1; s >= 0; s-- {
 		instructions.Reset()
-		if ok := tryFixAt(instructions, part1Sequence[s]); ok {
+		if accumulator, ok := tryFixAt(instructions, part1Sequence[s]); ok {
+			fmt.Printf("  RESULT: Accumulator = %d\n", accumulator)
 			return
 		}
 	}
 
-	fmt.Printf("PART 2 ERROR: Failed to find any instructions where flipping jmp<->nop removed the infinite recursion\n")
+	fmt.Printf("  ERROR: Failed to find any instructions where flipping jmp<->nop removed the infinite recursion\n")
 	os.Exit(1)
 }

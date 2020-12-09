@@ -39,7 +39,7 @@ func (s *Solution) getEntries(ctx context.Context, inputFile string, oldPolicy b
 }
 
 func (s *Solution) part1(ctx context.Context, inputFile string) {
-	fmt.Println("PART 1")
+	fmt.Println("\nPART 1")
 
 	entries, err := s.getEntries(ctx, inputFile, true)
 	if err != nil {
@@ -58,7 +58,7 @@ func (s *Solution) part1(ctx context.Context, inputFile string) {
 }
 
 func (s *Solution) part2(ctx context.Context, inputFile string) {
-	fmt.Println("PART 2")
+	fmt.Println("\nPART 2")
 
 	entries, err := s.getEntries(ctx, inputFile, false)
 	if err != nil {

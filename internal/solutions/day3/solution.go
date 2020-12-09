@@ -54,7 +54,7 @@ func (s *Solution) getMap(ctx context.Context, inputFile string) (navMap *Map, e
 }
 
 func (s *Solution) run(part int, navMap *Map, slopes ...Position) {
-	fmt.Printf("PART %d\n", part)
+	fmt.Printf("\nPART %d\n", part)
 
 	hitsProduct := int64(1)
 	for _, slope := range slopes {

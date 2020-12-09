@@ -75,7 +75,7 @@ func (s *Solution) getPassports(ctx context.Context, inputFile string) (passport
 }
 
 func (s *Solution) run(part int, passports []Passport, checkValues bool) {
-	fmt.Printf("PART %d\n", part)
+	fmt.Printf("\nPART %d\n", part)
 
 	validCount := 0
 	for _, passport := range passports {

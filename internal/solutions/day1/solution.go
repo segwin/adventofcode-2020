@@ -44,7 +44,7 @@ func (s *Solution) getValues(ctx context.Context, inputFile string) (values []in
 }
 
 func (s *Solution) part1(values []int) {
-	fmt.Println("PART 1")
+	fmt.Println("\nPART 1")
 
 	for i := range values {
 		for j := i + 1; j < len(values); j++ {
@@ -57,7 +57,7 @@ func (s *Solution) part1(values []int) {
 }
 
 func (s *Solution) part2(values []int) {
-	fmt.Println("PART 2")
+	fmt.Println("\nPART 2")
 
 	for i := range values {
 		for j := i + 1; j < len(values); j++ {

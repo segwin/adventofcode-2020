@@ -51,7 +51,7 @@ func (s *Solution) getSeats(ctx context.Context, inputFile string) (seatIDs []ui
 }
 
 func (s *Solution) part1(seatIDs ...uint16) {
-	fmt.Println("PART 1")
+	fmt.Println("\nPART 1")
 
 	maxID := uint16(0)
 	for _, id := range seatIDs {
@@ -64,7 +64,7 @@ func (s *Solution) part1(seatIDs ...uint16) {
 }
 
 func (s *Solution) part2(seatIDs ...uint16) {
-	fmt.Println("PART 2")
+	fmt.Println("\nPART 2")
 
 	// sort seat IDs so we can identify a gap
 	sort.Slice(seatIDs, func(i, j int) bool { return seatIDs[i] < seatIDs[j] })

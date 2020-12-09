@@ -46,7 +46,7 @@ func (s *Solution) getLines(scanner input.Scanner, callback func(line string)) {
 }
 
 func (s *Solution) part1(scanner input.Scanner) {
-	fmt.Println("PART 1")
+	fmt.Println("\nPART 1")
 
 	yesCount := 0
 	group := NewIndividualResponses()
@@ -76,7 +76,7 @@ func (s *Solution) part1(scanner input.Scanner) {
 }
 
 func (s *Solution) part2(scanner input.Scanner) {
-	fmt.Println("PART 2")
+	fmt.Println("\nPART 2")
 
 	yesCount := 0
 	group := NewUnanimousResponses()
