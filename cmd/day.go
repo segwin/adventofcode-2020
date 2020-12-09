@@ -15,7 +15,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var inputFile string
+var (
+	inputFiles = map[int]*string{}
+)
 
 func newDayCommand(day int, solution solutions.Solution) *cobra.Command {
 	dayCmd := &cobra.Command{
@@ -23,11 +25,13 @@ func newDayCommand(day int, solution solutions.Solution) *cobra.Command {
 		Short: fmt.Sprintf("Run the solution for day %d", day),
 		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, _ []string) {
-			solution.Run(cmd.Context(), inputFile)
+			solution.Run(cmd.Context(), *inputFiles[day])
 		},
 	}
 
-	dayCmd.Flags().StringVarP(&inputFile, "input", "i", fmt.Sprintf("inputs/day%d/input", day), "Path to input file for this solution")
+	inputFiles[day] = new(string)
+	dayCmd.Flags().StringVarP(inputFiles[day], "input", "i", fmt.Sprintf("inputs/day%d/input", day), "Path to input file for this solution")
+
 	return dayCmd
 }
 
