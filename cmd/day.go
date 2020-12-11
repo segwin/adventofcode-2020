@@ -5,6 +5,7 @@ import (
 
 	"github.com/segwin/adventofcode-2020/internal/solutions"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day1"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day10"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day2"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day3"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day4"
@@ -38,16 +39,16 @@ func newDayCommand(day int, solution solutions.Solution) *cobra.Command {
 
 func newDayCommands() map[string]*cobra.Command {
 	return map[string]*cobra.Command{
-		"day1": newDayCommand(1, &day1.Solution{}),
-		"day2": newDayCommand(2, &day2.Solution{}),
-		"day3": newDayCommand(3, &day3.Solution{}),
-		"day4": newDayCommand(4, &day4.Solution{}),
-		"day5": newDayCommand(5, &day5.Solution{}),
-		"day6": newDayCommand(6, &day6.Solution{}),
-		"day7": newDayCommand(7, &day7.Solution{}),
-		"day8": newDayCommand(8, &day8.Solution{}),
-		"day9": newDayCommand(9, &day9.Solution{}),
-		//"day10": newDayCommand(10, &day10.Solution{}),
+		"day1":  newDayCommand(1, &day1.Solution{}),
+		"day2":  newDayCommand(2, &day2.Solution{}),
+		"day3":  newDayCommand(3, &day3.Solution{}),
+		"day4":  newDayCommand(4, &day4.Solution{}),
+		"day5":  newDayCommand(5, &day5.Solution{}),
+		"day6":  newDayCommand(6, &day6.Solution{}),
+		"day7":  newDayCommand(7, &day7.Solution{}),
+		"day8":  newDayCommand(8, &day8.Solution{}),
+		"day9":  newDayCommand(9, &day9.Solution{}),
+		"day10": newDayCommand(10, &day10.Solution{}),
 		//"day11": newDayCommand(11, &day11.Solution{}),
 		//"day12": newDayCommand(12, &day12.Solution{}),
 		//"day13": newDayCommand(13, &day13.Solution{}),
