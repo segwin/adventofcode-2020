@@ -145,7 +145,7 @@ func TestSolutionPart1(t *testing.T) {
 
 	prevLayout := input
 	for i, expectedStage := range expectedStages {
-		got := s.evolveLayout(prevLayout)
+		got := s.evolveLayout(prevLayout, 4, false)
 		if diff := cmp.Diff(expectedStage, got); diff != "" {
 			t.Errorf("Unexpected diff (iteration: %d):\n%v", i+1, diff)
 		}
@@ -163,9 +163,5 @@ func TestSolutionPart1(t *testing.T) {
 
 	if got, expected := prevLayout.Count(Occupied), 37; got != expected {
 		t.Errorf("Got %v, expected %v", got, expected)
-	}
-
-	if diff := cmp.Diff(prevLayout, s.part1(input)); diff != "" {
-		t.Errorf("Unexpected diff:\n%v", diff)
 	}
 }
