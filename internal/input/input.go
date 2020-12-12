@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 )
 
 var (
@@ -50,4 +51,13 @@ func NewFileScanner(ctx context.Context, path string) (Scanner, error) {
 	}
 
 	return scanner, nil
+}
+
+func NewStringScanner(ctx context.Context, input string) Scanner {
+	scanner := &scanner{
+		Scanner: bufio.NewScanner(strings.NewReader(input)),
+		close:   func() error { return nil },
+	}
+
+	return scanner
 }

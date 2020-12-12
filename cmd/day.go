@@ -6,6 +6,7 @@ import (
 	"github.com/segwin/adventofcode-2020/internal/solutions"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day1"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day10"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day11"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day2"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day3"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day4"
@@ -49,7 +50,7 @@ func newDayCommands() map[string]*cobra.Command {
 		"day8":  newDayCommand(8, &day8.Solution{}),
 		"day9":  newDayCommand(9, &day9.Solution{}),
 		"day10": newDayCommand(10, &day10.Solution{}),
-		//"day11": newDayCommand(11, &day11.Solution{}),
+		"day11": newDayCommand(11, &day11.Solution{}),
 		//"day12": newDayCommand(12, &day12.Solution{}),
 		//"day13": newDayCommand(13, &day13.Solution{}),
 		//"day14": newDayCommand(14, &day14.Solution{}),
