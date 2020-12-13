@@ -8,7 +8,20 @@ import (
 	"github.com/segwin/adventofcode-2020/internal/solutions/day10"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day11"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day12"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day13"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day14"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day15"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day16"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day17"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day18"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day19"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day2"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day20"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day21"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day22"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day23"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day24"
+	"github.com/segwin/adventofcode-2020/internal/solutions/day25"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day3"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day4"
 	"github.com/segwin/adventofcode-2020/internal/solutions/day5"
@@ -53,18 +66,18 @@ func newDayCommands() map[string]*cobra.Command {
 		"day10": newDayCommand(10, &day10.Solution{}),
 		"day11": newDayCommand(11, &day11.Solution{}),
 		"day12": newDayCommand(12, &day12.Solution{}),
-		//"day13": newDayCommand(13, &day13.Solution{}),
-		//"day14": newDayCommand(14, &day14.Solution{}),
-		//"day15": newDayCommand(15, &day15.Solution{}),
-		//"day16": newDayCommand(16, &day16.Solution{}),
-		//"day17": newDayCommand(17, &day17.Solution{}),
-		//"day18": newDayCommand(18, &day18.Solution{}),
-		//"day19": newDayCommand(19, &day19.Solution{}),
-		//"day20": newDayCommand(20, &day20.Solution{}),
-		//"day21": newDayCommand(21, &day21.Solution{}),
-		//"day22": newDayCommand(22, &day22.Solution{}),
-		//"day23": newDayCommand(23, &day23.Solution{}),
-		//"day24": newDayCommand(24, &day24.Solution{}),
-		//"day25": newDayCommand(25, &day25.Solution{}),
+		"day13": newDayCommand(13, &day13.Solution{}),
+		"day14": newDayCommand(14, &day14.Solution{}),
+		"day15": newDayCommand(15, &day15.Solution{}),
+		"day16": newDayCommand(16, &day16.Solution{}),
+		"day17": newDayCommand(17, &day17.Solution{}),
+		"day18": newDayCommand(18, &day18.Solution{}),
+		"day19": newDayCommand(19, &day19.Solution{}),
+		"day20": newDayCommand(20, &day20.Solution{}),
+		"day21": newDayCommand(21, &day21.Solution{}),
+		"day22": newDayCommand(22, &day22.Solution{}),
+		"day23": newDayCommand(23, &day23.Solution{}),
+		"day24": newDayCommand(24, &day24.Solution{}),
+		"day25": newDayCommand(25, &day25.Solution{}),
 	}
 }
