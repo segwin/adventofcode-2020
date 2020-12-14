@@ -7,7 +7,7 @@ These are my solutions for each day of the [Advent of Code 2020 event](https://a
 To run these, you must have Go 1.13+ installed. You can build the app with the following command:
 
 ```bash
-go build . -o aoc
+go build -o aoc .
 ```
 
 To run a given day (e.g. day 5):
