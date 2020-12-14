@@ -14,5 +14,7 @@ func New(name string) *cobra.Command {
 		rootCmd.AddCommand(cmd)
 	}
 
+	rootCmd.AddCommand(newAllCommand())
+
 	return rootCmd
 }

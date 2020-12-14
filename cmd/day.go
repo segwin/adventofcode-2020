@@ -52,32 +52,42 @@ func newDayCommand(day int, solution solutions.Solution) *cobra.Command {
 	return dayCmd
 }
 
-func newDayCommands() map[string]*cobra.Command {
-	return map[string]*cobra.Command{
-		"day1":  newDayCommand(1, &day1.Solution{}),
-		"day2":  newDayCommand(2, &day2.Solution{}),
-		"day3":  newDayCommand(3, &day3.Solution{}),
-		"day4":  newDayCommand(4, &day4.Solution{}),
-		"day5":  newDayCommand(5, &day5.Solution{}),
-		"day6":  newDayCommand(6, &day6.Solution{}),
-		"day7":  newDayCommand(7, &day7.Solution{}),
-		"day8":  newDayCommand(8, &day8.Solution{}),
-		"day9":  newDayCommand(9, &day9.Solution{}),
-		"day10": newDayCommand(10, &day10.Solution{}),
-		"day11": newDayCommand(11, &day11.Solution{}),
-		"day12": newDayCommand(12, &day12.Solution{}),
-		"day13": newDayCommand(13, &day13.Solution{}),
-		"day14": newDayCommand(14, &day14.Solution{}),
-		"day15": newDayCommand(15, &day15.Solution{}),
-		"day16": newDayCommand(16, &day16.Solution{}),
-		"day17": newDayCommand(17, &day17.Solution{}),
-		"day18": newDayCommand(18, &day18.Solution{}),
-		"day19": newDayCommand(19, &day19.Solution{}),
-		"day20": newDayCommand(20, &day20.Solution{}),
-		"day21": newDayCommand(21, &day21.Solution{}),
-		"day22": newDayCommand(22, &day22.Solution{}),
-		"day23": newDayCommand(23, &day23.Solution{}),
-		"day24": newDayCommand(24, &day24.Solution{}),
-		"day25": newDayCommand(25, &day25.Solution{}),
+var (
+	solutionsList = []solutions.Solution{
+		&day1.Solution{},
+		&day2.Solution{},
+		&day3.Solution{},
+		&day4.Solution{},
+		&day5.Solution{},
+		&day6.Solution{},
+		&day7.Solution{},
+		&day8.Solution{},
+		&day9.Solution{},
+		&day10.Solution{},
+		&day11.Solution{},
+		&day12.Solution{},
+		&day13.Solution{},
+		&day14.Solution{},
+		&day15.Solution{},
+		&day16.Solution{},
+		&day17.Solution{},
+		&day18.Solution{},
+		&day19.Solution{},
+		&day20.Solution{},
+		&day21.Solution{},
+		&day22.Solution{},
+		&day23.Solution{},
+		&day24.Solution{},
+		&day25.Solution{},
 	}
+)
+
+func newDayCommands() map[string]*cobra.Command {
+	commands := map[string]*cobra.Command{}
+	for i, solution := range solutionsList {
+		day := i + 1
+		commands[fmt.Sprintf("day%d", day)] = newDayCommand(day, solution)
+	}
+
+	return commands
 }
