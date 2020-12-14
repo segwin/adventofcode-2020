@@ -1,7 +1,17 @@
 name: build-all
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello world"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15.0'
+      - name: build app
+        run: go build . -o aoc
+      - name: run unit tests
+        run: go test ./...
+      - name: run all solutions
+        run: for d in $(seq 1 25); do ./aoc day$d; done
