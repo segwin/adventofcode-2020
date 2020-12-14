@@ -13,6 +13,8 @@ import (
 
 var (
 	ErrUnexpectedPermutations = errors.New("unexpected number of permutations")
+	ErrBadInputLine           = errors.New("invalid input line")
+	ErrBadMemFormat           = errors.New("invalid mem[N] format")
 )
 
 type Solution struct{}
@@ -84,12 +86,15 @@ func (s *Solution) runLines(scanner input.Scanner, part1 bool) (memory map[int64
 		// expect format: "<operation> = <value>"
 		words := strings.Split(line, " = ")
 		if len(words) != 2 {
-			return nil, fmt.Errorf("expected 2 words") // TODO: create error definition
+			return nil, fmt.Errorf("%w (%q)", ErrBadInputLine, line)
 		}
 
 		if words[0] == "mask" {
 			// simpler case: just update the mask
-			currentMask.Unmarshal(words[1], part1)
+			if err := currentMask.Unmarshal(words[1], part1); err != nil {
+				return nil, err
+			}
+
 			continue
 		}
 
@@ -129,7 +134,7 @@ func (s *Solution) runLines(scanner input.Scanner, part1 bool) (memory map[int64
 func (s *Solution) parseMem(key, value string) (address *Bitset, bitset *Bitset, err error) {
 	matches := regexp.MustCompile(`mem\[(?P<address>[0-9]+)\]`).FindStringSubmatch(key)
 	if len(matches) != 2 {
-		return nil, nil, fmt.Errorf("expected 2 matches, got %d", len(matches)) // TODO: create error definition
+		return nil, nil, fmt.Errorf("%w (%q)", ErrBadMemFormat, key)
 	}
 
 	addressStr := matches[1]
