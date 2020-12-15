@@ -2,11 +2,16 @@ package day15
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
 
 	"github.com/segwin/adventofcode-2020/internal/input"
+)
+
+var (
+	ErrInvalidInput = errors.New("invalid input file")
 )
 
 type Solution struct{}
@@ -18,43 +23,44 @@ func (s *Solution) Run(ctx context.Context, inputFile string) {
 		os.Exit(1)
 	}
 
-	values, err := s.getValues(scanner)
+	startingNumbers, err := s.readInput(scanner)
 	if err != nil {
-		fmt.Printf("ERROR: Failed to get problem values: %v\n", err)
+		fmt.Printf("ERROR: Failed to get input line: %v\n", err)
 		os.Exit(1)
 	}
 
-	s.part1(values)
-	s.part2(values)
-}
-
-func (s *Solution) getValues(scanner input.Scanner) (values []ProblemValue, err error) {
-	for scanner.Scan() {
-		if err := scanner.Err(); err != nil {
-			return nil, err
-		}
-
-		line := strings.TrimSpace(scanner.Text())
-
-		var v ProblemValue
-		if err := v.Unmarshal(line); err != nil {
-			return nil, err
-		}
-
-		values = append(values, v)
+	memory := NewMemory()
+	if err := memory.Unmarshal(startingNumbers); err != nil {
+		fmt.Printf("  ERROR: Failed to parse starting numbers: %v\n", err)
+		return
 	}
 
-	return values, nil
+	lastSpoken := s.play(memory, 1, 2020, 0)
+	s.play(memory, 2, 30000000, lastSpoken)
 }
 
-func (s *Solution) part1(values []ProblemValue) {
-	fmt.Println("\nPART 1")
+func (s *Solution) readInput(scanner input.Scanner) (line string, err error) {
+	var lines []string
+	for scanner.Scan() {
+		if err := scanner.Err(); err != nil {
+			return "", err
+		}
 
-	// TODO
+		lines = append(lines, strings.TrimSpace(scanner.Text()))
+	}
+
+	if len(lines) != 1 {
+		return "", fmt.Errorf("%w (got %d lines)", ErrInvalidInput, len(lines))
+	}
+
+	return lines[0], nil
 }
 
-func (s *Solution) part2(values []ProblemValue) {
-	fmt.Println("\nPART 2")
+func (s *Solution) play(memory Memory, part int, generations int, lastSpoken int) (newLastSpoken int) {
+	fmt.Printf("\nPART %d\n", part)
 
-	// TODO
+	lastSpoken = memory.Recite(generations, lastSpoken)
+
+	fmt.Printf("  RESULT: Number spoken on %dth iteration is %d\n", generations, lastSpoken)
+	return lastSpoken
 }
