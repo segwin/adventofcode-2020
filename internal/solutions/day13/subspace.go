@@ -72,8 +72,10 @@ func (a *Subspace) Intersect(b *Subspace) (c *Subspace, err error) {
 	m.Mul(m, x)
 
 	// since both A and B are at the same point when they intersect, we only need m
-	// to compute it:
-	//   (m * periodA - offsetA) % periodC
+	// to compute it (note that we're only interested in the *first* offset, hence
+	// the modulo):
+	//
+	//   offsetC = -(m * periodA - offsetA) % periodC
 	offsetC := big.NewInt(0).Mul(m, periodA)
 	offsetC.Sub(a.Offset, offsetC)
 	offsetC.Mod(offsetC, periodC)
