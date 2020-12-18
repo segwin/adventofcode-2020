@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/segwin/adventofcode-2020/internal/geometry"
 )
 
 func TestTransformPart1(t *testing.T) {
@@ -13,13 +14,13 @@ func TestTransformPart1(t *testing.T) {
 	type Test struct {
 		// inputs
 		Direction rune
-		Magnitude int
-		Ship      *Coordinates
-		Waypoint  *Coordinates
+		Magnitude int64
+		Ship      geometry.Point
+		Waypoint  geometry.Point
 
 		// outputs
-		ExpectedShip     *Coordinates
-		ExpectedWaypoint *Coordinates
+		ExpectedShip     geometry.Point
+		ExpectedWaypoint geometry.Point
 		ExpectedErr      error
 	}
 
@@ -46,80 +47,80 @@ func TestTransformPart1(t *testing.T) {
 			Direction: 'F',
 			Magnitude: 10,
 
-			Ship:             &Coordinates{},
-			Waypoint:         &Coordinates{X: 1},
-			ExpectedShip:     &Coordinates{X: 10},
-			ExpectedWaypoint: &Coordinates{X: 1},
+			Ship:             geometry.NewInts(0, 0),
+			Waypoint:         geometry.NewInts(1, 0),
+			ExpectedShip:     geometry.NewInts(10, 0),
+			ExpectedWaypoint: geometry.NewInts(1, 0),
 		},
 
 		"N3, prev=East": {
 			Direction: 'N',
 			Magnitude: 3,
 
-			Ship:             &Coordinates{X: 10},
-			Waypoint:         &Coordinates{X: 1},
-			ExpectedShip:     &Coordinates{X: 10, Y: 3},
-			ExpectedWaypoint: &Coordinates{X: 1},
+			Ship:             geometry.NewInts(10, 0),
+			Waypoint:         geometry.NewInts(1, 0),
+			ExpectedShip:     geometry.NewInts(10, 3),
+			ExpectedWaypoint: geometry.NewInts(1, 0),
 		},
 
 		"F7, prev=East": {
 			Direction: 'F',
 			Magnitude: 7,
 
-			Ship:             &Coordinates{X: 10, Y: 3},
-			Waypoint:         &Coordinates{X: 1},
-			ExpectedShip:     &Coordinates{X: 17, Y: 3},
-			ExpectedWaypoint: &Coordinates{X: 1},
+			Ship:             geometry.NewInts(10, 3),
+			Waypoint:         geometry.NewInts(1, 0),
+			ExpectedShip:     geometry.NewInts(17, 3),
+			ExpectedWaypoint: geometry.NewInts(1, 0),
 		},
 
 		"R90, prev=East": {
 			Direction: 'R',
 			Magnitude: 90,
 
-			Ship:             &Coordinates{X: 17, Y: 3},
-			Waypoint:         &Coordinates{X: 1},
-			ExpectedShip:     &Coordinates{X: 17, Y: 3},
-			ExpectedWaypoint: &Coordinates{Y: -1},
+			Ship:             geometry.NewInts(17, 3),
+			Waypoint:         geometry.NewInts(1, 0),
+			ExpectedShip:     geometry.NewInts(17, 3),
+			ExpectedWaypoint: geometry.NewInts(0, -1),
 		},
 
 		"F11, prev=South": {
 			Direction: 'F',
 			Magnitude: 11,
 
-			Ship:             &Coordinates{X: 17, Y: 3},
-			Waypoint:         &Coordinates{Y: -1},
-			ExpectedShip:     &Coordinates{X: 17, Y: -8},
-			ExpectedWaypoint: &Coordinates{Y: -1},
+			Ship:             geometry.NewInts(17, 3),
+			Waypoint:         geometry.NewInts(0, -1),
+			ExpectedShip:     geometry.NewInts(17, -8),
+			ExpectedWaypoint: geometry.NewInts(0, -1),
 		},
 
 		"L90, prev=South": {
 			Direction: 'L',
 			Magnitude: 90,
 
-			Ship:             &Coordinates{X: 17, Y: -8},
-			Waypoint:         &Coordinates{Y: -1},
-			ExpectedShip:     &Coordinates{X: 17, Y: -8},
-			ExpectedWaypoint: &Coordinates{X: 1},
+			Ship:             geometry.NewInts(17, -8),
+			Waypoint:         geometry.NewInts(0, -1),
+			ExpectedShip:     geometry.NewInts(17, -8),
+			ExpectedWaypoint: geometry.NewInts(1, 0),
 		},
 
 		"R270, prev=East": {
 			Direction: 'R',
 			Magnitude: 270,
 
-			Ship:             &Coordinates{X: 17, Y: -8},
-			Waypoint:         &Coordinates{X: 1},
-			ExpectedShip:     &Coordinates{X: 17, Y: -8},
-			ExpectedWaypoint: &Coordinates{Y: 1},
+			Ship:             geometry.NewInts(17, -8),
+			Waypoint:         geometry.NewInts(1, 0),
+			ExpectedShip:     geometry.NewInts(17, -8),
+			ExpectedWaypoint: geometry.NewInts(0, 1),
 		},
 
 		"L270, prev=North": {
 			Direction: 'L',
 			Magnitude: 270,
 
-			Ship:             &Coordinates{X: 17, Y: -8},
-			Waypoint:         &Coordinates{Y: 1},
-			ExpectedShip:     &Coordinates{X: 17, Y: -8},
-			ExpectedWaypoint: &Coordinates{X: 1},
+			Ship:             geometry.NewInts(17, -8),
+			Waypoint:         geometry.NewInts(0, 1),
+			ExpectedShip:     geometry.NewInts(17, -8),
+			ExpectedWaypoint: geometry.NewInts(1, 0),
 		},
 	}
 
@@ -134,13 +135,13 @@ func TestTransformPart2(t *testing.T) {
 	type Test struct {
 		// inputs
 		Direction rune
-		Magnitude int
-		Ship      *Coordinates
-		Waypoint  *Coordinates
+		Magnitude int64
+		Ship      geometry.Point
+		Waypoint  geometry.Point
 
 		// outputs
-		ExpectedShip     *Coordinates
-		ExpectedWaypoint *Coordinates
+		ExpectedShip     geometry.Point
+		ExpectedWaypoint geometry.Point
 		ExpectedErr      error
 	}
 
@@ -167,50 +168,50 @@ func TestTransformPart2(t *testing.T) {
 			Direction: 'F',
 			Magnitude: 10,
 
-			Ship:             &Coordinates{},
-			Waypoint:         &Coordinates{X: 10, Y: 1},
-			ExpectedShip:     &Coordinates{X: 100, Y: 10},
-			ExpectedWaypoint: &Coordinates{X: 10, Y: 1},
+			Ship:             geometry.NewInts(0, 0),
+			Waypoint:         geometry.NewInts(10, 1),
+			ExpectedShip:     geometry.NewInts(100, 10),
+			ExpectedWaypoint: geometry.NewInts(10, 1),
 		},
 
 		"N3, prev=East": {
 			Direction: 'N',
 			Magnitude: 3,
 
-			Ship:             &Coordinates{X: 100, Y: 10},
-			Waypoint:         &Coordinates{X: 10, Y: 1},
-			ExpectedShip:     &Coordinates{X: 100, Y: 10},
-			ExpectedWaypoint: &Coordinates{X: 10, Y: 4},
+			Ship:             geometry.NewInts(100, 10),
+			Waypoint:         geometry.NewInts(10, 1),
+			ExpectedShip:     geometry.NewInts(100, 10),
+			ExpectedWaypoint: geometry.NewInts(10, 4),
 		},
 
 		"F7, prev=East": {
 			Direction: 'F',
 			Magnitude: 7,
 
-			Ship:             &Coordinates{X: 100, Y: 10},
-			Waypoint:         &Coordinates{X: 10, Y: 4},
-			ExpectedShip:     &Coordinates{X: 170, Y: 38},
-			ExpectedWaypoint: &Coordinates{X: 10, Y: 4},
+			Ship:             geometry.NewInts(100, 10),
+			Waypoint:         geometry.NewInts(10, 4),
+			ExpectedShip:     geometry.NewInts(170, 38),
+			ExpectedWaypoint: geometry.NewInts(10, 4),
 		},
 
 		"R90, prev=East": {
 			Direction: 'R',
 			Magnitude: 90,
 
-			Ship:             &Coordinates{X: 170, Y: 38},
-			Waypoint:         &Coordinates{X: 10, Y: 4},
-			ExpectedShip:     &Coordinates{X: 170, Y: 38},
-			ExpectedWaypoint: &Coordinates{X: 4, Y: -10},
+			Ship:             geometry.NewInts(170, 38),
+			Waypoint:         geometry.NewInts(10, 4),
+			ExpectedShip:     geometry.NewInts(170, 38),
+			ExpectedWaypoint: geometry.NewInts(4, -10),
 		},
 
 		"F11, prev=South": {
 			Direction: 'F',
 			Magnitude: 11,
 
-			Ship:             &Coordinates{X: 170, Y: 38},
-			Waypoint:         &Coordinates{X: 4, Y: -10},
-			ExpectedShip:     &Coordinates{X: 214, Y: -72},
-			ExpectedWaypoint: &Coordinates{X: 4, Y: -10},
+			Ship:             geometry.NewInts(170, 38),
+			Waypoint:         geometry.NewInts(4, -10),
+			ExpectedShip:     geometry.NewInts(214, -72),
+			ExpectedWaypoint: geometry.NewInts(4, -10),
 		},
 	}
 

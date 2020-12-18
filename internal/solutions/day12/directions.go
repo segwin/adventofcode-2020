@@ -1,6 +1,10 @@
 package day12
 
-import "math"
+import (
+	"math"
+
+	"github.com/segwin/adventofcode-2020/internal/geometry"
+)
 
 type CardinalDirection uint
 
@@ -14,19 +18,21 @@ const (
 	numCardinalDirections = 4
 )
 
-func (d CardinalDirection) Translation(magnitude int) *Translation {
+func (d CardinalDirection) Translation(magnitude int64) *Translation {
+	coord := geometry.NewInts(0, 0)
+
 	switch d {
 	case North:
-		return &Translation{Y: +magnitude}
+		coord.MustSet(geometry.Int(+magnitude), 1)
 	case South:
-		return &Translation{Y: -magnitude}
+		coord.MustSet(geometry.Int(-magnitude), 1)
 	case East:
-		return &Translation{X: +magnitude}
+		coord.MustSet(geometry.Int(+magnitude), 0)
 	case West:
-		return &Translation{X: -magnitude}
+		coord.MustSet(geometry.Int(-magnitude), 0)
 	}
 
-	return nil
+	return &Translation{coord: coord}
 }
 
 func (d CardinalDirection) RotationFrom(reference CardinalDirection) *Rotation {
@@ -36,7 +42,7 @@ func (d CardinalDirection) RotationFrom(reference CardinalDirection) *Rotation {
 		return nil
 	}
 
-	return &Rotation{Degrees: int(numRotations) * 90}
+	return &Rotation{Degrees: int64(numRotations) * 90}
 }
 
 func (d CardinalDirection) String() string {
@@ -91,17 +97,19 @@ func (d RelativeDirection) Transforms() (ship, waypoint bool) {
 	return false, false
 }
 
-func (d RelativeDirection) Transformation(magnitude int, waypoint *Coordinates) Transformation {
+func (d RelativeDirection) Transformation(magnitude int64, waypoint geometry.Point) Transformation {
 	switch d {
 	case Left, Right:
 		return &Rotation{
-			Degrees: int(d) * magnitude,
+			Degrees: int64(d) * magnitude,
 		}
 
 	case Forward:
 		return &Translation{
-			X: waypoint.X * magnitude,
-			Y: waypoint.Y * magnitude,
+			coord: geometry.NewInts(
+				waypoint.MustGet(0).Int()*magnitude,
+				waypoint.MustGet(1).Int()*magnitude,
+			),
 		}
 	}
 

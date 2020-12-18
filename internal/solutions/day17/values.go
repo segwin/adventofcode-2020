@@ -1,7 +1,7 @@
 package day17
 
 type ProblemValue struct {
-	// TODO: define for this problem
+	Active bool
 }
 
 func (v *ProblemValue) Unmarshal(line string) error {

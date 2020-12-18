@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/segwin/adventofcode-2020/internal/geometry"
 	"github.com/segwin/adventofcode-2020/internal/input"
 )
 
@@ -17,7 +18,7 @@ func (s *Solution) Run(ctx context.Context, inputFile string) {
 	s.part2(ctx, inputFile)
 }
 
-func (s *Solution) transformLines(scanner input.Scanner, ship, waypoint *Coordinates, part2 bool) (finalPosition *Coordinates, err error) {
+func (s *Solution) transformLines(scanner input.Scanner, ship, waypoint geometry.Point, part2 bool) (finalPosition geometry.Point, err error) {
 	for scanner.Scan() {
 		if err := scanner.Err(); err != nil {
 			return nil, err
@@ -34,7 +35,7 @@ func (s *Solution) transformLines(scanner input.Scanner, ship, waypoint *Coordin
 			return nil, err
 		}
 
-		ship, waypoint, err = Transform(directionCharacter, magnitude, ship, waypoint, part2)
+		ship, waypoint, err = Transform(directionCharacter, int64(magnitude), ship, waypoint, part2)
 		if err != nil {
 			return nil, err
 		}
@@ -52,8 +53,8 @@ func (s *Solution) part1(ctx context.Context, inputFile string) {
 		os.Exit(1)
 	}
 
-	initialShip := &Coordinates{}
-	initialWaypoint := &Coordinates{X: 1} // start facing east
+	initialShip := geometry.NewInts(0, 0)
+	initialWaypoint := geometry.NewInts(1, 0) // start facing east
 
 	finalShip, err := s.transformLines(scanner, initialShip, initialWaypoint, false)
 	if err != nil {
@@ -61,18 +62,18 @@ func (s *Solution) part1(ctx context.Context, inputFile string) {
 	}
 
 	directionX := East
-	if finalShip.X < 0 {
+	if finalShip.MustGet(0).Int() < 0 {
 		directionX = West
-		finalShip.X *= -1
+		finalShip.MustSet(geometry.Int(-finalShip.MustGet(0).Int()), 0)
 	}
 
 	directionY := North
-	if finalShip.Y < 0 {
+	if finalShip.MustGet(1).Int() < 0 {
 		directionY = South
-		finalShip.Y *= -1
+		finalShip.MustSet(geometry.Int(-finalShip.MustGet(1).Int()), 1)
 	}
 
-	fmt.Printf("  RESULT: %s%d, %s%d\n", directionX, finalShip.X, directionY, finalShip.Y)
+	fmt.Printf("  RESULT: %s%d, %s%d\n", directionX, finalShip.MustGet(0).Int(), directionY, finalShip.MustGet(1).Int())
 }
 
 func (s *Solution) part2(ctx context.Context, inputFile string) {
@@ -84,8 +85,8 @@ func (s *Solution) part2(ctx context.Context, inputFile string) {
 		os.Exit(1)
 	}
 
-	initialShip := &Coordinates{}
-	initialWaypoint := &Coordinates{X: 10, Y: 1} // start facing east
+	initialShip := geometry.NewInts(0, 0)
+	initialWaypoint := geometry.NewInts(10, 1) // start facing east
 
 	finalShip, err := s.transformLines(scanner, initialShip, initialWaypoint, true)
 	if err != nil {
@@ -93,16 +94,16 @@ func (s *Solution) part2(ctx context.Context, inputFile string) {
 	}
 
 	directionX := East
-	if finalShip.X < 0 {
+	if finalShip.MustGet(0).Int() < 0 {
 		directionX = West
-		finalShip.X *= -1
+		finalShip.MustSet(geometry.Int(-finalShip.MustGet(0).Int()), 0)
 	}
 
 	directionY := North
-	if finalShip.Y < 0 {
+	if finalShip.MustGet(1).Int() < 0 {
 		directionY = South
-		finalShip.Y *= -1
+		finalShip.MustSet(geometry.Int(-finalShip.MustGet(1).Int()), 1)
 	}
 
-	fmt.Printf("  RESULT: %s%d, %s%d\n", directionX, finalShip.X, directionY, finalShip.Y)
+	fmt.Printf("  RESULT: %s%d, %s%d\n", directionX, finalShip.MustGet(0).Int(), directionY, finalShip.MustGet(1).Int())
 }
